@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow" />
+<title>ProPra 15 - Group 8</title>
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+    crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+    integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+    integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">ProPra 15 - Group 8</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="index.html">Home </a></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Tools <span
+                        class="caret"></span>
+                </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="acsearch.html">ACSEARCH</a></li>
+                        <li><a href="spcount.html">SPCOUNT</a></li>
+                        <li><a href="getpdb.html">GET_PDB</a></li>
+                    </ul></li>
+                <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> SecStruc Prediction <span
+                        class="caret"></span>
+                </a>
+                    <ul class="dropdown-menu">
+						<li><a href="toSeclib.html">Create SecLib</a></li>
+			<li><a href="model.html">Create Model</a></li>
+			<li><a href="predit.html">Predict</a></li>
+			<li><a href="validate.html">Validate</a></li>
+                    </ul></li>
+
+		 <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Alignment <span
+                        class="caret"></span>
+                </a>
+                    <ul class="dropdown-menu">
+                        <li class="active"><a href="alignment.html">Create Alignment<span class="sr-only">(current)</span></a></li>
+			<li><a href="validation.html">Validation</a></li>
+			<li><a href="statistics.html">Statistics</a></li>
+                    </ul></li>
+
+
+
+
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="col-md-offset-2 col-md-8">
+            <noscript>
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> <span class="sr-only">Error:</span> Please enable Javascript to use this side.
+                </div>
+            </noscript>
+
+            <h1>Create Alignment</h1>
+
+		<h5>
+
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form action="cgi-bin/alignment.pl" method="post" enctype="multipart/form-data" target="_blank">
+                        <div class="form-group">
+			<br>
+
+<input type="radio" name="nw" value="gotoh" checked> <label> Gotoh &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+<input type="radio" name="nw" value="nw"> <label> Needleman-Wunsch</label>
+ 
+<hr>
+Mode: <br><br>
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>  <select name="mode" size="3"> <option selected value="global"> global </option> <option value="local"> local </option> <option value="freeshift" > freeshift </option></select> 
+			
+<hr>
+
+Gap open: <input type="number" name="gapopen" min="-50" max="0" step="1" value="-12" size =3> <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+Gap extend: <input type="number" name="gapextend" min="-50" max="0" step="1" value="-1" size =3>
+			
+<hr>
+
+<input type="radio" name="subm" value="example" checked> Common substitution matrices: <br><br>
+
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><select name="smatrix" size="4"> <option selected value="dayhoff"> Dayhoff matrix</option> <option value="blosum"> BLOSUM 62 </option> <option value="pam" > PAM 250 </option><option value="blake" > BlakeCohen Matrix </option></select> 
+<br><br>
+
+	
+<input type="radio" name="subm" value="loaded"> Substition matrix: <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="file" name="matrix" accept=".mat">
+
+<hr>
+<input type="radio" name="pairs" value="paste"> Sequences to align: <br>
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>sequence 1: <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+sequence 2: <br> 
+<textarea cols="30" rows ="3"; type="text" name="seq1" value=""></textarea>
+	<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+<textarea cols="30" rows ="3"; type="text" name="seq2" value=""></textarea>
+
+
+<br><br>
+<input type="radio" name="pairs" value="example" checked> Example Pairs and Seqlib <br><br>
+<input type="radio" name="pairs" value="pdb"> PDB-ID for sequences in PDB database: <br>
+
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+PDB-ID 1: <input type="text" name="pdbID1" value="4ZVA" size =10>	<label>&nbsp;&nbsp;&nbsp;</label>
+PDB-ID 2: <input type="text" name="pdbID2" value="5F8K" size =10>
+
+
+<br><br>
+<input type="radio" name="pairs" value="loaded"><br> Pairs data: <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="file" name="pairsEx" accept="text/*"><br> SeqLib data: <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="file" name="seqlib" accept="text/*">
+
+<hr>
+
+Output: <label>&nbsp;&nbsp;</label><input type="radio" name="format" value="html" checked> .html
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="radio" name="format" value="scores"> scores
+<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="radio" name="format" value="ali"> .ali
+<hr>
+
+Add dynamic programming matrices: &nbsp;&nbsp;<input type="radio" name="dpmatrices" value="no" checked> no <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 
+<input type="radio" name="dpmatrices" value="yes"> yes	<br>
+			<hr>
+				</div>
+                            <br><button class="btn btn-primary" type="submit">Start</button>
+                    </form>
+                </div>
+            </div>
+</h5>
+        </div>
+    </div>
+
+</body>
+</html>
