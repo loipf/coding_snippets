@@ -78,7 +78,7 @@ all_identical <- function(elem_list, ...) {
   }
 
   return(TRUE)
-}}
+}
 
 
 
