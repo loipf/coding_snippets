@@ -102,6 +102,13 @@ as.factor_keep_order <- function(f){
 }
 
 
+matrix_to_character <- function(matrix){
+  matrix[] <- lapply(matrix, function(x) if(is.factor(x)) as.character(x) else x)
+  return(matrix)
+}
+
+
+
 ### get the repository file
 ### get_dirname=TRUE - get the full file path
 ### get_dirname=TRUE - get only directory name of the file
