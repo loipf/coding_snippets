@@ -8,6 +8,12 @@ pre <- function(df) {
   df[1:rows,1:cols]
 }
 
+### print with timestamp
+print_time <- function(txt){
+  print(paste0(Sys.time(),":   ",txt))
+}
+
+
 
 ### Get basename without extension
 basename_core <- function(path) {
