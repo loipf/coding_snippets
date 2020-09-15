@@ -54,6 +54,11 @@ which_min <- function(vec) {
   which(vec == min(vec, na.rm = TRUE))
 }
 
+### get row/col positions of func values in matrix
+matrix_get_position <- function(matrix, func=min(matrix)) {
+  which(matrix == func, arr.ind = TRUE)
+}
+
 
 ### list the duplicated values
 duplicated_values <- function(vec) {
