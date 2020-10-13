@@ -70,6 +70,18 @@ duplicated_values_bool <- function(vec) {
   vec %in% vec[duplicated(vec)]
 }
 
+### center rows/columns of a matrix to zero
+center_rowwise <- function(x, na.rm=T) {
+  x_center = x - rowMeans(x, na.rm=na.rm)
+  return(x_center)
+}
+
+center_columnwise <- function(x, na.rm=T) {
+  x_center <- t(t(x) - colMeans(x, na.rm = na.rm))
+  return(x_center)
+}
+
+
 
 ### test if the elements of a list are identical
 ###
