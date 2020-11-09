@@ -15,10 +15,17 @@ print_time <- function(txt){
 
 
 
-### Get basename without extension
-basename_core <- function(path) {
-  tools::file_path_sans_ext(basename(path))
+### get basename without extension
+basename_core <- function(path, with_path=TRUE) {
+  only_name = tools::file_path_sans_ext(basename(path))
+  
+  if(with_path){
+    return(file.path(dirname(path), only_name ))
+  } else {
+    return(only_name)
+  }
 }
+
 
 ### Test whether x is either:
 ### - NULL
