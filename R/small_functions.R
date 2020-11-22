@@ -234,4 +234,20 @@ find_common_substring_beginning <- function(words) {
                             
                             
    
+### transpose data.frame or matrix while keeping names                           
+transpose_with_names <- function(df) {
+  old_row <- rownames(df)
+  old_col <- colnames(df)
+  
+  trans_df <- t(df)
+  rownames(trans_df) <- old_col
+  colnames(trans_df) <- old_row
+  
+  if(is.data.frame(df)) trans_df = data.frame(trans_df)
+  return(trans_df)
+}
                             
+                            
+                            
+                            
+ 
