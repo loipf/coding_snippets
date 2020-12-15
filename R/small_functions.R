@@ -13,6 +13,11 @@ print_time <- function(txt){
   print(paste0(Sys.time(),":   ",txt))
 }
 
+### get actual name of variable/function instead of values
+get_var_name <- function(obj) {
+  deparse(substitute(obj))
+}
+
 
 
 ### get basename without extension
