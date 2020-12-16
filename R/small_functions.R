@@ -13,9 +13,17 @@ print_time <- function(txt){
   print(paste0(Sys.time(),":   ",txt))
 }
 
+
 ### get actual name of variable/function instead of values
 get_var_name <- function(obj) {
   deparse(substitute(obj))
+}
+
+
+### merges two dataframes according to their rownames
+merge_rownames_df <- function(df1, df2, ...) {
+  merge_df = merge(df1, df2, by="row.names")
+  transform(merge_df, row.names=Row.names, Row.names=NULL)
 }
 
 
