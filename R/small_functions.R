@@ -23,7 +23,7 @@ get_var_name <- function(obj) {
 ### merges two dataframes according to their rownames
 merge_rownames_df <- function(df1, df2, ...) {
   merge_df = merge(df1, df2, by="row.names", ...)
-  transform(merge_df, row.names=Row.names, Row.names=NULL)
+  data.frame(merge_df, row.names = 1, check.names = F )
 }
 
 
