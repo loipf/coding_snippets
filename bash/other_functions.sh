@@ -16,5 +16,7 @@ echo_time "download .fa files"
 awk 'BEGIN{FS="\t"}END{print "COLUMN NO: "NF " ROWS NO: "NR}' file
 
 
+### output only rows which lie between linenumbers
+awk 'NR >= 400 && NR <= 405' file
 
 
