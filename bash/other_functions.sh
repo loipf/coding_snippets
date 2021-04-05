@@ -20,3 +20,11 @@ awk 'BEGIN{FS="\t"}END{print "COLUMN NO: "NF " ROWS NO: "NR}' file
 awk 'NR >= 400 && NR <= 405' file
 
 
+
+
+
+
+### get system information
+inxi -Fxz
+
+
