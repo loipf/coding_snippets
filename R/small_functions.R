@@ -1,4 +1,9 @@
 
+### source other useful scripts
+source("https://raw.githubusercontent.com/loipf/coding_snippets/master/R/undebug_all.R")
+
+
+
 
 
 ### small preview of matrix
