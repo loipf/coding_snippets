@@ -265,8 +265,12 @@ transpose_with_names <- function(df) {
   if(is.data.frame(df)) trans_df = data.frame(trans_df)
   return(trans_df)
 }
+
                             
-                            
-                            
-                            
- 
+### helper function to get default value of function
+get_default_value_function <- function(func, arg_name) {
+  default_pos = grep(arg_name, names(formals(func)), fixed = FALSE)
+  arg_default = formals(func)[[default_pos]]
+  return(eval(arg_default))
+}
+
