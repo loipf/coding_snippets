@@ -21,6 +21,11 @@ awk 'NR >= 400 && NR <= 405' file
 
 
 
+### compare two files if identical
+cmp --silent file1 file2 && echo '### SUCCESS: identical files ###' || echo '### WARNING: different files ###'
+
+
+
 
 
 
