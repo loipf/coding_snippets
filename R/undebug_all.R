@@ -49,6 +49,8 @@ undebug_all <- function(where=search()) {
 }
 
 
+### within debugger: save obj to global environment
+# assign(x = "obj_name", value = obj, envir = .GlobalEnv)
 
 
 
