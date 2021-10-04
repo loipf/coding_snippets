@@ -81,8 +81,8 @@ which_min <- function(vec) {
 }
 
 ### get row/col positions of func values in matrix
-matrix_get_position <- function(matrix, func=min(matrix)) {
-  which(matrix == func, arr.ind = TRUE)
+matrix_get_position <- function(matrix, func=max) {
+  which(matrix == func(matrix), arr.ind = TRUE)
 }
 
 
