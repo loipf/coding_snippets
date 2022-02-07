@@ -1,0 +1,8 @@
+### replace function in package environment with new function
+
+new_func <- function(){}
+
+environment(new_func) <- asNamespace('PACKAGE')
+assignInNamespace('old_func', new_func, ns = 'PACKAGE')
+
+
