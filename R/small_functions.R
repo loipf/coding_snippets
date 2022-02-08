@@ -280,12 +280,17 @@ get_default_value_function <- function(func, arg_name) {
 compare_two_vectors = function(v1, v2) {
   v1_char = as.character(v1)
   v2_char = as.character(v2)
-  v1_duplicates = sum(duplicated(v1))
-  v2_duplicates = sum(duplicated(v2))
+  v1_na_values = sum(is.na(v1_char))
+  v2_na_values = sum(is.na(v2_char))
+  v1_char = v1_char[!is.na(v1_char)]
+  v2_char = v2_char[!is.na(v2_char)]
+  v1_duplicates = sum(duplicated(v1_char))
+  v2_duplicates = sum(duplicated(v2_char))
   v_intersect = length(intersect(v1_char, v2_char))
   v1_only = length(setdiff(v1_char, v2_char))
   v2_only = length(setdiff(v2_char, v1_char))
-  output_txt = paste0("vector comparison:\n\tduplicates v1:\t",v1_duplicates,
+  output_txt = paste0("vector comparison:\n\tNA in v1:\t",v1_na_values, 
+                      "\n\tNA in v2:\t",v2_na_values, "\n\tduplicates v1:\t",v1_duplicates,
                       "\n\tduplicates v2:\t", v2_duplicates, "\n\tintersection:\t",v_intersect,
                       "\n\tonly in v1:\t",v1_only, "\n\tonly in v2:\t",v2_only )
   cat(output_txt)
