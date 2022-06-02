@@ -7,11 +7,12 @@ source("https://raw.githubusercontent.com/loipf/coding_snippets/master/R/undebug
 
 
 ### small preview of matrix
-pre <- function(df) {
-  rows <- min(nrow(df),6)
-  cols <- min(ncol(df),6)
+pre <- function(df, n_entries=6) {
+  rows <- min(nrow(df),n_entries)
+  cols <- min(ncol(df),n_entries)
   df[1:rows,1:cols, drop=F]
 }
+
 
 
 ### print with timestamp
