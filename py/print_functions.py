@@ -2,8 +2,11 @@ import time
 
 
 
-def print_time(text):
-    print('### ' + time.strftime("%c") + '   ' + text)
+def print_time(txt):
+    # from datetime import datetime
+    dateTimeObj = datetime.now()
+    timestamp_str = dateTimeObj.strftime("%d-%m-%Y %H:%M:%S")
+    print('### ' + timestamp_str + '   ' + txt)
 
 
 
