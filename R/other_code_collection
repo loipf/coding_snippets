@@ -5,3 +5,36 @@ https://gist.github.com/melissamlwong/b489e7765a620c5fb1f3af0ece3024b1
 
 
 
+
+
+
+### parallelized fast filling of matrix with specific function output
+library(BiocParallel)
+get_semipartial_corr = function(x_df, y_df, z_df, corr_method='spearman', BPPARAM){
+  # x_df = tacna_profile_list[[met]]  ### samples x genes
+  # y_df = immune_mm_list[[met]]  ### samples x immune_tc - controlled with z
+  # z_df = tacna_list[[met]][,c('avg_abs_cna_burden_amp','avg_abs_cna_burden_del')]  ### samples x covariates
+  
+  par_grid = expand.grid('x_col' = 1:ncol(x_df), 'y_col' = 1:ncol(y_df))
+  
+  corr_obj_list = bplapply(1:nrow(par_grid), function(curr_row){
+    spcor_obj = ppcor::spcor.test(x=x_df[[par_grid[curr_row,'x_col']]], y=y_df[[par_grid[curr_row,'y_col']]], z=z_df, method = corr_method)
+    c(spcor_obj$estimate, spcor_obj$p.value)
+  }, BPPARAM = BPPARAM)
+  
+  corr_list = sapply(corr_obj_list, '[[', 1)
+  corr_df = matrix(corr_list, ncol(x_df), ncol(y_df))
+  dimnames(corr_df) = list(colnames(x_df), colnames(y_df))
+  
+  pvalue_list = sapply(corr_obj_list, '[[', 2)
+  pvalue_df = matrix(pvalue_list, ncol(x_df), ncol(y_df))
+  dimnames(pvalue_df) = list(colnames(x_df), colnames(y_df))
+  
+  return(list("corr_df"=corr_df, 'pvalue_df'=pvalue_df))
+}
+
+
+
+
+
+
