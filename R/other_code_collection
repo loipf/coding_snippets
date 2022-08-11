@@ -22,6 +22,17 @@ get_semipartial_corr = function(x_df, y_df, z_df, corr_method='spearman', BPPARA
     c(spcor_obj$estimate, spcor_obj$p.value)
   }, BPPARAM = BPPARAM)
   
+  
+  # ### with error handling
+  # corr_obj_list = bptry(bplapply(1:nrow(par_grid), function(curr_row){
+  #   spcor_obj = spcor.test(x=x_df[[par_grid[curr_row,'x_col']]], y=y_df[[par_grid[curr_row,'y_col']]], z=z_df, method = corr_method)
+  #   c(spcor_obj$estimate, spcor_obj$p.value)
+  # }, BPPARAM = BPPARAM) )
+  # 
+  # ### grep entries with error - singular errors should be 1 - others not - check with neg p-value !!
+  # corr_obj_list[!bpok(corr_obj_list)] = rep(list(c(1, -1)), sum(!bpok(corr_obj_list)))
+  
+  
   corr_list = sapply(corr_obj_list, '[[', 1)
   corr_df = matrix(corr_list, ncol(x_df), ncol(y_df))
   dimnames(corr_df) = list(colnames(x_df), colnames(y_df))
