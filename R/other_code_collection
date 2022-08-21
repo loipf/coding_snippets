@@ -47,5 +47,21 @@ get_semipartial_corr = function(x_df, y_df, z_df, corr_method='spearman', BPPARA
 
 
 
+### from https://stackoverflow.com/questions/21798930/how-to-read-specific-rows-of-csv-file-with-fread-function
+load_dataframe_lines = function(file_path, lines, ...) {
+  # file_rows = reader::file.nrow(file_path)
+  file_rows = as.numeric(strsplit(system(paste0("wc -l ",file_path), intern = T), " ")[[1]][1])
+  
+  v <- (1:file_rows %in% lines)
+  seq  <- rle(v)
+  idx  <- c(0, cumsum(seq$lengths))[which(seq$values)] + 1
+  indx <- data.frame(start=idx, length=seq$length[which(seq$values)])
+  
+  result <- do.call(rbind,apply(indx,1, function(x) return(data.table::fread(file_path,nrows=x[2],skip=x[1]))))
+  result_df = data.frame(result, row.names = 1, check.names = F, ...)
+  result_df
+}
+
+
 
 
