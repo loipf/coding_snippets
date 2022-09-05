@@ -65,3 +65,13 @@ load_dataframe_lines = function(file_path, lines, ...) {
 
 
 
+### threshold given in bytes
+remove_variables_with_low_memory <- function(threshold=5000){
+  # format(object.size(x), units = "Mb") 
+  variable_size_list = eapply(as.environment(globalenv()), object.size)
+  rm(list=names(which(variable_size_list < threshold)), envir = as.environment(globalenv()))
+}
+
+
+
+
