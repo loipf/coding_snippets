@@ -21,8 +21,9 @@ save_dataframe <- function(df, file_path, ...) {
     
     ### numeric rownames sometimes still cause problems in fwrite
     ### see: https://github.com/Rdatatable/data.table/issues/4957
-    if(is.numeric(as.numeric(rownames(df)))) {
-      warning('numeric rownames: rownames may be incorrect')
+    suppressWarnings({ numeric_rownames = as.numeric(rownames(df)) })
+    if(is.numeric(numeric_rownames) & !all(is.na(numeric_rownames)) ) {
+      warning('numeric rownames: rownames in output file may be incorrect')
       
       # ### alternative
       # write.table(as.data.frame(df), file_path, row.names = T, col.names = NA, sep = default_sep, quote = F, ...)
