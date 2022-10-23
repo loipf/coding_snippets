@@ -78,7 +78,7 @@ remove_variables_with_low_memory <- function(threshold=5000){
 corr_rowwise = function(df1, df2, num_threads=1, ...) {
 
   ### TODO no equal rowname|colnames check implemented  
-  df2 = df2[rownames(df1), colnames(df1)]
+  df2 = df2[as.character(rownames(df1)), colnames(df1)]
   
   if(all(dim(df1) != dim(df2))){ stop("unequal dimensions") }
 
