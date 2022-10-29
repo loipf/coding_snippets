@@ -1,0 +1,29 @@
+### docker commands
+
+
+### remove all containers and then images
+docker rm -vf $(docker ps -aq)
+docker rmi -f $(docker images -aq)
+
+
+### build docker
+docker build -t image_name Dockerfile
+
+
+### run interactively
+docker run -it image_name
+docker run -it --entrypoint /bin/bash -v "/src/:/path/in/docker" -v "${PWD}:/path/in/docker" image_name
+
+
+### command execution
+docker run --rm image_name
+
+
+### submit local docker image to dockerhub
+docker login -u username
+docker tag image_name username/image_name:latest
+docker push username/image_name:latest
+
+
+
+
