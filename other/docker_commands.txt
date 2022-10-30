@@ -6,8 +6,8 @@ docker rm -vf $(docker ps -aq)
 docker rmi -f $(docker images -aq)
 
 
-### build docker
-docker build -t image_name Dockerfile
+### build docker, needs Dockerfile in directory path
+docker build -t image_name .
 
 
 ### run interactively
