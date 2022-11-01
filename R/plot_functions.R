@@ -91,3 +91,27 @@ plot_venn_3 <- function(df1, df2, df3, df_label=c("df1","df2", "df3"), title='')
 
 
 
+### histogram with significance comparison
+library(ggsignif)
+plot_histogram_sig = function(plot_df, x_name, y_name) {
+  pval_all_combis = combn(unique(plot_df[[x_name]]),2)
+  pval_comparison_list = lapply(1:ncol(pval_all_combis), function(col_num) { pval_all_combis[,col_num] })
+  
+  plot_df_edited = plot_df[,c(x_name, y_name)]
+  colnames(plot_df_edited) = c('x','y')
+  
+  p = ggplot(plot_df_edited, aes(x = x, y = y)) + geom_boxplot() + theme_classic() +
+    xlab(x_name) + ylab(y_name) +
+    geom_jitter(color="black", width = 0.05, height=0.0, alpha=0.7)
+  
+  # sigFunc = function(x){ if(x < 0.1){format(x, digits=3)} else{NA}}
+  p = p + geom_signif(comparisons = pval_comparison_list, 
+                      # map_signif_level = TRUE,
+                      # map_signif_level = sigFunc,
+                      step_increase = 0.07,test = "wilcox.test", textsize=2.8)
+  p
+}
+
+
+
+
