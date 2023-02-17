@@ -263,7 +263,7 @@ transpose_with_names <- function(df) {
   rownames(trans_df) <- old_col
   colnames(trans_df) <- old_row
   
-  if(is.data.frame(df)) trans_df = data.frame(trans_df)
+  if(is.data.frame(df)) trans_df = data.frame(trans_df, check.names=F)
   return(trans_df)
 }
 
