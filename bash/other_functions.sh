@@ -29,3 +29,11 @@ diff <(ls -1a dir1) <(ls -1a dir2)
 inxi -Fxz
 
 
+
+### create md5 hash for all files with a certain name
+find . -type f -name '*.bam' -execdir sh -c 'md5sum "$1" > "$1.md5"' _ {} \;
+
+
+
+
+
