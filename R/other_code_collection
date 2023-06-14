@@ -46,6 +46,37 @@ get_semipartial_corr = function(x_df, y_df, z_df, corr_method='spearman', BPPARA
 
 
 
+### parallelized pairwise mwu tests 
+library(BiocParallel)
+get_pairwise_mwu = function(x_df, y_df, BPPARAM){
+  # x_df = tacna_profile_list[[met]]  ### samples x genes
+  # y_df = immune_mm_list[[met]]  ### samples x immune_tc - controlled with z
+  
+  if(!all(rownames(x_df)== rownames(y_df))){
+    stop("different rownames")
+  }
+  
+  par_grid = expand.grid('x_col' = 1:ncol(x_df), 'y_col' = 1:ncol(y_df))
+  
+  mwu_obj_list = bplapply(1:nrow(par_grid), function(curr_row){
+    if(length(unique(y_df[[par_grid[curr_row,'y_col']]]))>1) { ### at least two classes
+      mwu_obj = wilcox.test(x=x_df[[par_grid[curr_row,'x_col']]], y=y_df[[par_grid[curr_row,'y_col']]], alternative='two.sided', conf.int=T)
+      mwu_pvalue = mwu_obj$p.value * sign(mwu_obj$estimate) * (-1)
+    } else { 
+      mwu_pvalue = NA
+    }
+    mwu_pvalue
+  }, BPPARAM = BPPARAM)
+  
+  mwu_list = sapply(mwu_obj_list, '[[', 1)
+  mwu_df = matrix(mwu_list, ncol(x_df), ncol(y_df))
+  dimnames(mwu_df) = list(colnames(x_df), colnames(y_df))
+  return(mwu_df)
+}
+
+
+
+
 
 ### from https://stackoverflow.com/questions/21798930/how-to-read-specific-rows-of-csv-file-with-fread-function
 load_dataframe_lines = function(file_path, lines, ...) {
