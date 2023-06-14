@@ -305,3 +305,14 @@ compare_two_vectors = function(v1, v2) {
                       "\n\tonly in v2:\t",v2_only )
   cat(output_txt)
 }
+
+                            
+                            
+create_example_df = function(rows=10, columns=20) {
+  df_dimnames = list(paste0("sample_",1:rows), paste0("gene_",1:columns))
+  df <- data.frame(matrix(rnorm(columns * rows), ncol = columns, dimnames = df_dimnames))
+  return(df)
+}                            
+                            
+                            
+                            
