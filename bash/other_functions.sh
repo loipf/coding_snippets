@@ -23,11 +23,12 @@ cmp --silent file1 file2 && echo '### SUCCESS: identical files ###' || echo '###
 diff -qr dir1 dir2
 diff <(ls -1a dir1) <(ls -1a dir2)
 
+### get disk usage info per user
+du -shc /home/* 2>&1 | grep -v '^du:'
 
 
 ### get system information
 inxi -Fxz
-
 
 
 ### create md5 hash for all files with a certain name
