@@ -1,9 +1,11 @@
 ### other useful code blocks:
 
 ### parallized correlation for large matrices and output to bash file 
-https://gist.github.com/melissamlwong/b489e7765a620c5fb1f3af0ece3024b1
+### https://gist.github.com/melissamlwong/b489e7765a620c5fb1f3af0ece3024b1
 
 
+### install old R-packge version
+### remotes::install_version("Seurat", version = "4.4.0", repos = "http://cran.us.r-project.org")
 
 
 
