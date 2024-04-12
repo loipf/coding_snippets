@@ -312,7 +312,13 @@ create_example_df = function(rows=10, columns=20) {
   df_dimnames = list(paste0("sample_",1:rows), paste0("gene_",1:columns))
   df <- data.frame(matrix(rnorm(columns * rows), ncol = columns, dimnames = df_dimnames))
   return(df)
-}                            
+}
+
+                            
+estimate_mode <- function(x) {
+  d <- density(x)
+  d$x[which.max(d$y)]
+}
                             
                             
                             
