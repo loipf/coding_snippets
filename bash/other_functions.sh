@@ -31,7 +31,8 @@ du -shc /home/* 2>&1 | grep -v '^du:'
 inxi -Fxz
 
 
-### create md5 hash for all files with a certain name
+### create md5 hash for all files in subdirectories (with a certain name)
+find . -type f -exec md5sum {} \; > md5sums.txt
 find . -type f -name '*.bam' -execdir sh -c 'md5sum "$1" > "$1.md5"' _ {} \;
 
 
