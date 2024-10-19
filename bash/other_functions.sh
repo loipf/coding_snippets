@@ -36,6 +36,11 @@ find . -type f -exec md5sum {} \; > md5sums.txt
 find . -type f -name '*.bam' -execdir sh -c 'md5sum "$1" > "$1.md5"' _ {} \;
 
 
+### bash function
+pdfcompress ()
+{
+  gs -q -dNOPAUSE -dBATCH -dSAFER -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dEmbedAllFonts=true -dSubsetFonts=true -dColorImageDownsampleType=/Bicubic -dColorImageResolution=144 -dGrayImageDownsampleType=/Bicubic -dGrayImageResolution=144 -dMonoImageDownsampleType=/Bicubic -dMonoImageResolution=144 -sOutputFile=${1%.*}.compressed.pdf $1; 
+}
 
 
 
