@@ -114,4 +114,25 @@ plot_histogram_sig = function(plot_df, x_name, y_name) {
 
 
 
+plot_boxplot = function(x, y, x_label="x", y_label="y", colors=T, show_pvalue=T, jitter=FALSE) {
+  require(ggpubr)
+  plot_df = data.frame("x"=as.factor(as.character(x)), "y"=y)
+  plot_df = na.omit(plot_df)
+  
+  p = ggpubr::ggboxplot(plot_df, x="x", y="y", 
+            color=ifelse(colors, "x", "black"), palette=ggthemes::calc_pal()(12),
+            add=ifelse(jitter, "jitter", FALSE),
+            xlab = x_label, ylab=y_label)
+  
+  if(show_pvalue==T) {
+    x_comparisions = combn(unique(as.character(plot_df$x)), 2, simplify=F)
+    p = p + ggpubr::stat_compare_means(comparisons = x_comparisions, method = "wilcox.test", hide.ns = F, label = "p.signif") ### pairwise
+    p = p + ggpubr::stat_compare_means(label.y = -Inf, label.x=Inf, vjust=-1, hjust=1) ### global
+  }
+  
+  p + theme(legend.position = "none")
+  return(p)  
+}
+
+
 
