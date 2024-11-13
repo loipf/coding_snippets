@@ -19,6 +19,9 @@ du -sh * | sort -hr | head -n10
 find . -type f -name "*.pdf" -exec ls -lt {} +
 
 
+### create a zip folder for each folder in a directory
+for folder in ./*/; do zip -r "${folder%/}.zip" "$folder"; done
+
 
 
 
