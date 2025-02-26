@@ -42,6 +42,16 @@ plot_binhex <- function(x, y, title="", axis_limit=20, center=TRUE, xylabel=c("p
 
 
 
+create_venn_diagram_df = function(list_of_vectors) {
+    all_elements = unique(unlist(list_of_vectors))
+    overlap_df = data.frame(
+      element_id = all_elements,
+      do.call(cbind, lapply(list_of_vectors, function(set) all_elements %in% set))
+    )
+    colnames(overlap_df)[-1] <- names(list_of_vectors)
+    overlap_df
+}
+
 
 
 
